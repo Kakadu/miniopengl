@@ -2,4 +2,5 @@ git submodule update
 cd tinyrenderer
 git checkout 28b766a
 
+Original article: http://habrahabr.ru/post/248153/
 
