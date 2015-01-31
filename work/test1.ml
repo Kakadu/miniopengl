@@ -1,4 +1,5 @@
 open Printf
+let app_name = "Test 1"
 
 let swap: 'a . 'a ref -> 'a ref -> unit = fun r1 r2 ->
   let x = !r1 in
@@ -177,6 +178,7 @@ type config =
 let config = { line = line }
 
 let main =
+  print_endline app_name;
   let img   = Image.create 100 100 in
   let red   = Color.make 255 0 0 in
   let green = Color.make 0 255 0 in

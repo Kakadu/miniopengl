@@ -1,20 +1,26 @@
 OCAMLOPT=ocamlfind opt
-OCAMLOPTFLAGS=-g -S -p
+OCAMLOPTFLAGS=-g -S -p -inline 1
 
 OUT=main.native
+OUT_TEST1=test1.native
+OUT_ALL=$(OUT) $(OUT_TEST1)
 
 .SUFFIXES: .cpp .h .o .ml .cmx .cmo .cmi
 .PHONY: all depend clean
 
 all: $(OUT)
 
-TARGETS=gopenl.cmx tga.cmx main.cmx
+LIB_TARGETS=gopenl.cmx tga.cmx
+TARGETS=$(LIB_TARGETS) main.cmx
 
 main.native: $(TARGETS)
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) $(TARGETS) -o $@
+	$(OCAMLOPT) $(OCAMLOPTFLAGS) $^ -o $@
+
+$(OUT_TEST1): $(LIB_TARGETS) test1.cmx
+	$(OCAMLOPT) $(OCAMLOPTFLAGS) $^ -o $@
 
 .ml.cmx:
 	$(OCAMLOPT) $(OCAMLOPTFLAGS) -c $<
 
 clean:
-	$(RM) *.cm[oix] *.o *.s $(OUT)
+	$(RM) *.cm[oix] *.o *.s $(OUT_ALL)
