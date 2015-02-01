@@ -10,7 +10,7 @@ OUT_ALL=$(OUT) $(OUT_TEST1)
 
 all: $(OUT)
 
-LIB_TARGETS=gopenl.cmx tga.cmx
+LIB_TARGETS=gopenl.cmx tga.cmx wavefront.cmx
 TARGETS=$(LIB_TARGETS) main.cmx
 
 main.native: $(TARGETS)
