@@ -3,6 +3,22 @@ open Printf
 module Color = struct
   type t = int (* RGB*)
   let make r g b = r*256*256 + g*256 + b (* no A yet *)
+  let red   = make 255 0 0
+  let green = make 0 255 0
+  let white = make 255 255 255
+  let blue  = make 0 0 255
+  let yel   = make 255 255 0
+end
+
+module Vector2D = struct
+  type t = int * int
+  let make x y = (x,y)
+  let (+) (x0,y0) (x1,y1) = (x0+x1, y0+y1)
+  let (-) (x0,y0) (x1,y1) = (x0-x1, y0-y1)
+  let ( * ) (x0,y0) c = (x0*c, y0*c)
+  let mul_float (x,y) f = (float_of_int x *. f |> int_of_float, float_of_int y *. f |> int_of_float)
+  let x = fst
+  let y = snd
 end
 
 module Image = struct
