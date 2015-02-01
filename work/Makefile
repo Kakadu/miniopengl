@@ -1,5 +1,5 @@
 OCAMLOPT=ocamlfind opt
-OCAMLOPTFLAGS=-g -S -p -inline 1
+OCAMLOPTFLAGS=-package str -g -S -p -inline 1
 
 OUT=main.native
 OUT_TEST1=test1.native
@@ -14,7 +14,7 @@ LIB_TARGETS=gopenl.cmx tga.cmx
 TARGETS=$(LIB_TARGETS) main.cmx
 
 main.native: $(TARGETS)
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) $^ -o $@
+	$(OCAMLOPT) $(OCAMLOPTFLAGS) -linkpkg $^ -o $@
 
 $(OUT_TEST1): $(LIB_TARGETS) test1.cmx
 	$(OCAMLOPT) $(OCAMLOPTFLAGS) $^ -o $@
