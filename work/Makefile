@@ -22,5 +22,8 @@ $(OUT_TEST1): $(LIB_TARGETS) test1.cmx
 .ml.cmx:
 	$(OCAMLOPT) $(OCAMLOPTFLAGS) -c $<
 
+tga.cmx: gopenl.cmx
+main.cmx: gopenl.cmx
+
 clean:
 	$(RM) *.cm[oix] *.o *.s $(OUT_ALL)

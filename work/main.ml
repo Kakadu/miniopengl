@@ -20,7 +20,7 @@ type config =
   }
 
 let config = { line = Gopenl.line; doread=false }
-
+(*
 let main =
   let red   = Color.make 255 0 0 in
   let green = Color.make 0 255 0 in
@@ -57,4 +57,27 @@ let main =
       in
       List.iter f data.triangles
   end;
+  Tga.write_tga ~filename:"out.tga" ~img
+ *)
+
+let triangle ~img ~color (x0,y0) (x1,y1) (x2,y2) =
+  line ~color ~img x0 y0 x1 y1;
+  line ~color ~img x1 y1 x2 y2;
+  line ~color ~img x2 y2 x0 y0;
+  ()
+
+let main =
+  let red   = Color.make 255 0 0 in
+  let green = Color.make 0 255 0 in
+  let white = Color.make 255 255 255 in
+  let blue  = Color.make 0 0 255 in
+  let yel   = Color.make 255 255 0 in
+  let _ = [red; green; blue; yel] in
+  let width  = 200 in
+  let height = 200 in
+  let img   = Image.create width height in
+  Image.set_mirror_y img;
+  triangle ~img ~color:red   ( 10, 70) ( 50,160) ( 70, 80);
+  triangle ~img ~color:white (180, 50) (150,  1) ( 70,180);
+  triangle ~img ~color:green (180,150) (120,160) (130,180);
   Tga.write_tga ~filename:"out.tga" ~img

@@ -9,14 +9,17 @@ module Image = struct
   type t = { width: int
            ; height: int
            ; pix: int array
+           ; mutable mirror_y: bool
            }
   let create width height =
-    { width; height; pix = Array.make (width*height) 0 }
+    { width; height; pix = Array.make (width*height) 0; mirror_y=false }
 
-  let set ~img:{width; height; pix} x y ~(color:Color.t) =
+  let set ~img:{width; height; pix; mirror_y} x y ~(color:Color.t) =
+    let y = if mirror_y then height-y else y in
     try pix.(x+y*width) <- color
     with Invalid_argument s -> failwith @@ sprintf "Can't set pixel (%d,%d): %s" x y  s
 
+  let set_mirror_y : t -> unit = fun img -> img.mirror_y <- true
 
 end
 
